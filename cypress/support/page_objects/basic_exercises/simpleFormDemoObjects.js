@@ -50,7 +50,6 @@ class simpleFormDemoObjects{
     receivedSumShouldBeProperty(expectedSum){
         this.getReceivedMessage().should("contain", expectedMessage)
     }
-    
 }
 
 export default new simpleFormDemoObjects();
