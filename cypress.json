@@ -1,1 +1,5 @@
-{}
+{
+    "baseUrl": "https://demo.seleniumeasy.com/",
+    "viewportWidth": 1650,
+    "viewportHeight": 1200
+}
