@@ -2,6 +2,7 @@
 
 import SimpleFormDemo from "../support/page_objects/basic_exercises/SimpleFormDemo"
 import CheckBoxDemo from "../support/page_objects/basic_exercises/CheckBoxDemo"
+import RadioButtonsDemo from "../support/page_objects/basic_exercises/RadioButtonsDemo"
 
 describe("SimpleFormDemo", () =>{
     it("Received text should be equal to sending message ", () =>{
@@ -87,5 +88,30 @@ describe("CheckBoxDemo", () =>{
         }
         //then
         CheckBoxDemo.buttonTextShouldBe("Uncheck All")   
+    })
+})
+describe("Radio Buttons Demo", () =>{
+    it("Checking gender should get a correct message with this gender name", () =>{
+        //given
+        const gender = "Male"
+        cy.choseExercise('basic', 2)
+        //when
+        RadioButtonsDemo.checkRadioSelectGender(gender)
+        RadioButtonsDemo.clickOnGetCheckedValueButton()
+        //then
+        RadioButtonsDemo.checkMessage(gender)
+    })
+    it("Checking gender and age should get a correct message with this data", ()=>{
+        //given
+        const gender = "Female"
+        const age = "5 - 15"
+        cy.choseExercise('basic', 2)
+        //when
+        RadioButtonsDemo.checkGroupRadioAge(age)
+        RadioButtonsDemo.checkGroupRadioGender(gender)
+        RadioButtonsDemo.clickGetValuesButton()
+        //then
+        RadioButtonsDemo.checkGroupMessage(gender, age)
+
     })
 })

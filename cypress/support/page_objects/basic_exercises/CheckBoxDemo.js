@@ -24,24 +24,13 @@ class CheckBoxDemo{
         this.checkAllButtonElement.click()
     }
 
-    clickOption(optionNumber){
+    checkOption(optionNumber){
         this.allCheckboxListElement.eq(optionNumber).click()
     }
     
 
     receivedMessageShouldBeEqualToExpected(expectedMessage){
         this.getMessage.should("contains", expectedMessage)
-    }
-
-    checkedBoxesShouldBeEqualTo(expectedAmount){
-        let amountOfCheckedElement = 0
-        this.allCheckboxListElement.each(element => {
-            if(element.should("be.checked")){
-                amountOfCheckedElement++
-            }
-        })
-                
-        assert(amountOfCheckedElement == expectedAmount)
     }
     
     buttonTextShouldBe(expectedText){
