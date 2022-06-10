@@ -3,6 +3,7 @@
 import SimpleFormDemo from "../support/page_objects/basic_exercises/SimpleFormDemo"
 import CheckBoxDemo from "../support/page_objects/basic_exercises/CheckBoxDemo"
 import RadioButtonsDemo from "../support/page_objects/basic_exercises/RadioButtonsDemo"
+import SelectDropdownList from "../support/page_objects/basic_exercises/SelectDropdownList";
 
 describe("SimpleFormDemo", () =>{
     it("Received text should be equal to sending message ", () =>{
@@ -113,5 +114,29 @@ describe("Radio Buttons Demo", () =>{
         //then
         RadioButtonsDemo.checkGroupMessage(gender, age)
 
+    })
+})
+
+describe("Select Dropdown List", () =>{
+    it.only("Received message should contain chosen option", () =>{
+        //given
+        const option = "Wednesday"
+        cy.choseExercise('basic', 3)
+        //when
+        SelectDropdownList.selectOptionAtSingleList(option)
+        //then
+        SelectDropdownList.checkReceivedMessageAtSingleList(option)
+        
+    })
+    it.only("Chancing selected option should update received message", () =>{
+        //given
+        const firstOption = "Wednesday"
+        const secondOption = "Friday"
+        cy.choseExercise('basic', 3)
+        //when
+        SelectDropdownList.selectOptionAtSingleList(firstOption)
+        SelectDropdownList.selectOptionAtSingleList(secondOption)
+        //then
+        SelectDropdownList.checkReceivedMessageAtSingleList(secondOption)
     })
 })
