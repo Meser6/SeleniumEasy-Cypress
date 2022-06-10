@@ -1,6 +1,6 @@
-import { should } from "chai"
+//import { should } from "chai"
 
-class simpleFormDemoObjects{
+class SimpleFormDemo{
 
     get formToSendMessageElement(){
         return cy.get("form#get-input input")
@@ -26,10 +26,10 @@ class simpleFormDemoObjects{
 
 
     sendMessage(message){
-        this.formToSendMessageElement().type(message)
+        this.formToSendMessageElement.type(message)
     }
     clickOnShowMessageButton(){
-        this.showMessageButtonElement().click();
+        this.showMessageButtonElement.click();
     }
     get getReceivedMessage(){
         return this.receivedMessageElement.invoke("text")
@@ -39,17 +39,19 @@ class simpleFormDemoObjects{
         this.formToSendBElement.type(b)
     }
     clickOnGetTotalButton(){
-        this.getTotalButtonElement().click()
+        this.getTotalButtonElement.click()
     }
     get getTotalSum(){
         return this.receivedSumElement.invoke("text")
     }
+
+
     receivedMessageShouldBeEqualToSendingMessage(expectedMessage){
-        this.getReceivedMessage().should("contain", expectedMessage)
+        this.getReceivedMessage.should("contain", expectedMessage)
     }
     receivedSumShouldBeProperty(expectedSum){
-        this.getReceivedMessage().should("contain", expectedMessage)
+        this.getTotalSum.should("contain", expectedSum)
     }
 }
 
-export default new simpleFormDemoObjects();
+export default new SimpleFormDemo();
