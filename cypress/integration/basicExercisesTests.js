@@ -4,6 +4,7 @@ import SimpleFormDemo from "../support/page_objects/basic_exercises/SimpleFormDe
 import CheckBoxDemo from "../support/page_objects/basic_exercises/CheckBoxDemo"
 import RadioButtonsDemo from "../support/page_objects/basic_exercises/RadioButtonsDemo"
 import SelectDropdownList from "../support/page_objects/basic_exercises/SelectDropdownList";
+import JavaScriptAlerts from "../support/page_objects/basic_exercises/JavaScriptAlerts"
 
 describe("SimpleFormDemo", () =>{
     it("Received text should be equal to sending message ", () =>{
@@ -75,7 +76,7 @@ describe("CheckBoxDemo", () =>{
         cy.choseExercise('basic', 1)
         //when
         for(let i = 0; i <3; i++){
-            CheckBoxDemo.clickOption(i)
+            CheckBoxDemo.checkOption(i)
         }
         //then
         CheckBoxDemo.buttonTextShouldBe("Check All")   
@@ -85,7 +86,7 @@ describe("CheckBoxDemo", () =>{
         cy.choseExercise('basic', 1)
         //when
         for(let i = 0; i <4; i++){
-            CheckBoxDemo.clickOption(i)
+            CheckBoxDemo.checkOption(i)
         }
         //then
         CheckBoxDemo.buttonTextShouldBe("Uncheck All")   
@@ -118,7 +119,7 @@ describe("Radio Buttons Demo", () =>{
 })
 
 describe("Select Dropdown List", () =>{
-    it.only("Received message should contain chosen option", () =>{
+    it("Received message should contain chosen option", () =>{
         //given
         const option = "Wednesday"
         cy.choseExercise('basic', 3)
@@ -128,7 +129,7 @@ describe("Select Dropdown List", () =>{
         SelectDropdownList.checkReceivedMessageAtSingleList(option)
         
     })
-    it.only("Chancing selected option should update received message", () =>{
+    it("Chancing selected option should update received message", () =>{
         //given
         const firstOption = "Wednesday"
         const secondOption = "Friday"
@@ -138,5 +139,46 @@ describe("Select Dropdown List", () =>{
         SelectDropdownList.selectOptionAtSingleList(secondOption)
         //then
         SelectDropdownList.checkReceivedMessageAtSingleList(secondOption)
+    })
+})
+
+describe("Java Script Alerts", () =>{
+    it("In alert should be correct message ", () =>{
+        //given
+        cy.choseExercise('basic', 4)
+        // when
+        JavaScriptAlerts.initAlertBox()
+        //then
+        JavaScriptAlerts.checkAlertGetText("alert", "I am an alert box!")
+    })
+    it("There should be correct message after accept alert", () =>{
+        //given
+        cy.choseExercise('basic', 4)
+        // when
+        JavaScriptAlerts.initConfirmBox()
+        JavaScriptAlerts.acceptOrDismiss("confirm", true)
+        //then
+        JavaScriptAlerts.checkConfirmReceivedMessage("OK")
+
+    })
+    it("There should be correct message after cancel alert", () =>{
+        //given
+        cy.choseExercise('basic', 4)
+        // when
+        JavaScriptAlerts.initConfirmBox()
+        JavaScriptAlerts.acceptOrDismiss("confirm", false)
+        //then
+        JavaScriptAlerts.checkConfirmReceivedMessage("Cancel")
+
+    })
+    it("There should be correct message after adding text to prompt alert", () =>{
+        //given
+        const textToSend = "Test01!"
+        cy.choseExercise('basic', 4)
+        // when
+        JavaScriptAlerts.initPromptAndSendText(textToSend)
+        //then
+        JavaScriptAlerts.checkPromptReceivedMessage(textToSend)
+
     })
 })
