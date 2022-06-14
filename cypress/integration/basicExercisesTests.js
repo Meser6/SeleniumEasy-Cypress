@@ -5,6 +5,7 @@ import CheckBoxDemo from "../support/page_objects/basic_exercises/CheckBoxDemo"
 import RadioButtonsDemo from "../support/page_objects/basic_exercises/RadioButtonsDemo"
 import SelectDropdownList from "../support/page_objects/basic_exercises/SelectDropdownList";
 import JavaScriptAlerts from "../support/page_objects/basic_exercises/JavaScriptAlerts"
+import BootstrapAlerts from "../support/page_objects/basic_exercises/BootstrapAlerts"
 
 describe("SimpleFormDemo", () =>{
     it("Received text should be equal to sending message ", () =>{
@@ -180,5 +181,56 @@ describe("Java Script Alerts", () =>{
         //then
         JavaScriptAlerts.checkPromptReceivedMessage(textToSend)
 
+    })
+})
+describe("Bootstrap Alerts", () =>{
+   before(() =>{
+    cy.choseExercise('basic', 6)
+   })
+    const data = [
+        ["success", 5000],
+        ["warning",  3000],
+        ["danger",  5000],
+        ["info",  6000],
+    ]
+    data.forEach(($data) =>{
+        const [alertType, displayTime] = $data
+        it(alertType + " alert should disappear after "+ displayTime + " ms", ()=>{
+            //given
+            //when
+            BootstrapAlerts.clickOnAlarmBox(true, alertType)
+            //then
+            BootstrapAlerts.checkAlertMessage(true, alertType, displayTime)
+            BootstrapAlerts.checkIsCloseButtonDisplayed(false)
+            BootstrapAlerts.checkIsBoxIsInvisibility(true, alertType, displayTime)
+        })
+    })
+    it("All alerts type should have proper message and close button", () =>{
+        //given
+        const data = [
+            ["success"],
+            ["warning"],
+            ["danger"],
+            ["info"],
+        ]
+        data.forEach(($data) =>{
+        const [alertType] = $data
+        //when
+        BootstrapAlerts.clickOnAlarmBox(false, alertType)
+        //then
+        BootstrapAlerts.checkAlertMessage(false, alertType)
+        BootstrapAlerts.checkIsCloseButtonDisplayed(true)
+        })
+    })
+    it("After click on close button alert should not be visible", () =>{
+        //given
+        const isAutocloseable =  false
+        const alertType = "info"
+        //when
+        cy.visit("https://demo.seleniumeasy.com/bootstrap-alert-messages-demo.html")
+        BootstrapAlerts.clickOnAlarmBox(isAutocloseable, alertType)
+        BootstrapAlerts.closeAlert()
+        //then
+        BootstrapAlerts.checkIsBoxIsInvisibility(isAutocloseable, alertType, 0)
     })
 })
