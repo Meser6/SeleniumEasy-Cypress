@@ -8,45 +8,35 @@ import JavaScriptAlerts from "../support/page_objects/basic_exercises/JavaScript
 import BootstrapAlerts from "../support/page_objects/basic_exercises/BootstrapAlerts"
 
 describe("SimpleFormDemo", () =>{
+    beforeEach(() =>{
+        cy.choseExercise("basic", 0);
+    })
     it("Received text should be equal to sending message ", () =>{
         //given
-        cy.choseExercise("basic", 0);
         //when
         SimpleFormDemo.sendMessage("Test01")
         SimpleFormDemo.clickOnShowMessageButton()
         //then
         SimpleFormDemo.receivedMessageShouldBeEqualToSendingMessage("Test01")
     })
-    it("After sending correct inputs received sum should be properly", () =>{
-        //given
-        cy.choseExercise("basic", 0)
-        //when
-        SimpleFormDemo.sendValues(5, 10)
-        SimpleFormDemo.clickOnGetTotalButton()
-        //then
-        SimpleFormDemo.receivedSumShouldBeProperty(15)
-    })
-    it("After sending one incorrect inputs received sum should be NaN", () =>{
-        //given
-        cy.choseExercise("basic", 0)
-        //when
-        SimpleFormDemo.sendValues("!", 10)
-        SimpleFormDemo.clickOnGetTotalButton()
-        //then
-        SimpleFormDemo.receivedSumShouldBeProperty("NaN")
-    })
-    it("After sending two incorrect inputs received sum should be NaN", () =>{
-        //given
-        cy.choseExercise("basic", 0)
-        //when
-        SimpleFormDemo.sendValues("x", "y")
-        SimpleFormDemo.clickOnGetTotalButton()
-        //then
-        SimpleFormDemo.receivedSumShouldBeProperty("NaN")
+    const data =[
+        [5, 10, 15],
+        ['!', 10, 'NaN'],
+        ['x', 'y', 'NaN']
+    ]
+     data.forEach(($data) =>{
+        const [x, y, sum] = $data
+        it("After sending"+ x + ", " + y + "received sum should be" + sum, ()=>{
+            //given
+            //when
+            SimpleFormDemo.sendValues(x, y)
+            SimpleFormDemo.clickOnGetTotalButton()
+            //then
+            SimpleFormDemo.receivedSumShouldBeProperty(sum)
+        })
     })
     it("After sending empty inputs received sum should be NaN", () =>{
         //given
-        cy.choseExercise("basic", 0)
         //when
         SimpleFormDemo.clickOnGetTotalButton()
         //then
@@ -55,9 +45,11 @@ describe("SimpleFormDemo", () =>{
 })
 
 describe("CheckBoxDemo", () =>{
+    beforeEach(()=>{
+        cy.choseExercise('basic', 1)
+    })
     it("After checking single option there should be correct message", () =>{
         //given
-        cy.choseExercise('basic', 1)
         //when
         CheckBoxDemo.checkSingleCheckbox()
         //then
@@ -66,7 +58,6 @@ describe("CheckBoxDemo", () =>{
     })
     it("After click on Check All every option should be checked", () =>{
         //given
-        cy.choseExercise('basic', 1)
         //when
         CheckBoxDemo.checkAllCheckbox()
         //then
@@ -74,7 +65,6 @@ describe("CheckBoxDemo", () =>{
     })
     it("Checking three options should not change button text", () =>{
         //given
-        cy.choseExercise('basic', 1)
         //when
         for(let i = 0; i <3; i++){
             CheckBoxDemo.checkOption(i)
@@ -84,7 +74,6 @@ describe("CheckBoxDemo", () =>{
     })
     it("Checking four options should change button text", () =>{
         //given
-        cy.choseExercise('basic', 1)
         //when
         for(let i = 0; i <4; i++){
             CheckBoxDemo.checkOption(i)
@@ -93,11 +82,14 @@ describe("CheckBoxDemo", () =>{
         CheckBoxDemo.buttonTextShouldBe("Uncheck All")   
     })
 })
+
 describe("Radio Buttons Demo", () =>{
+    beforeEach(()=>{
+        cy.choseExercise('basic', 2)
+    })
     it("Checking gender should get a correct message with this gender name", () =>{
         //given
         const gender = "Male"
-        cy.choseExercise('basic', 2)
         //when
         RadioButtonsDemo.checkRadioSelectGender(gender)
         RadioButtonsDemo.clickOnGetCheckedValueButton()
@@ -108,7 +100,6 @@ describe("Radio Buttons Demo", () =>{
         //given
         const gender = "Female"
         const age = "5 - 15"
-        cy.choseExercise('basic', 2)
         //when
         RadioButtonsDemo.checkGroupRadioAge(age)
         RadioButtonsDemo.checkGroupRadioGender(gender)
@@ -120,21 +111,21 @@ describe("Radio Buttons Demo", () =>{
 })
 
 describe("Select Dropdown List", () =>{
+    beforeEach(()=>{
+        cy.choseExercise('basic', 3)
+    })
     it("Received message should contain chosen option", () =>{
         //given
         const option = "Wednesday"
-        cy.choseExercise('basic', 3)
         //when
         SelectDropdownList.selectOptionAtSingleList(option)
         //then
-        SelectDropdownList.checkReceivedMessageAtSingleList(option)
-        
+        SelectDropdownList.checkReceivedMessageAtSingleList(option)    
     })
     it("Chancing selected option should update received message", () =>{
         //given
         const firstOption = "Wednesday"
         const secondOption = "Friday"
-        cy.choseExercise('basic', 3)
         //when
         SelectDropdownList.selectOptionAtSingleList(firstOption)
         SelectDropdownList.selectOptionAtSingleList(secondOption)
@@ -144,9 +135,11 @@ describe("Select Dropdown List", () =>{
 })
 
 describe("Java Script Alerts", () =>{
+    beforeEach(()=>{
+        cy.choseExercise('basic', 4)
+    })
     it("In alert should be correct message ", () =>{
         //given
-        cy.choseExercise('basic', 4)
         // when
         JavaScriptAlerts.initAlertBox()
         //then
@@ -154,37 +147,32 @@ describe("Java Script Alerts", () =>{
     })
     it("There should be correct message after accept alert", () =>{
         //given
-        cy.choseExercise('basic', 4)
         // when
         JavaScriptAlerts.initConfirmBox()
         JavaScriptAlerts.acceptOrDismiss("confirm", true)
         //then
         JavaScriptAlerts.checkConfirmReceivedMessage("OK")
-
     })
     it("There should be correct message after cancel alert", () =>{
         //given
-        cy.choseExercise('basic', 4)
         // when
         JavaScriptAlerts.initConfirmBox()
         JavaScriptAlerts.acceptOrDismiss("confirm", false)
         //then
         JavaScriptAlerts.checkConfirmReceivedMessage("Cancel")
-
     })
     it("There should be correct message after adding text to prompt alert", () =>{
         //given
         const textToSend = "Test01!"
-        cy.choseExercise('basic', 4)
         // when
         JavaScriptAlerts.initPromptAndSendText(textToSend)
         //then
         JavaScriptAlerts.checkPromptReceivedMessage(textToSend)
-
     })
 })
+
 describe("Bootstrap Alerts", () =>{
-   before(() =>{
+   beforeEach(() =>{
     cy.choseExercise('basic', 6)
    })
     const data = [
@@ -227,7 +215,6 @@ describe("Bootstrap Alerts", () =>{
         const isAutocloseable =  false
         const alertType = "info"
         //when
-        cy.visit("https://demo.seleniumeasy.com/bootstrap-alert-messages-demo.html")
         BootstrapAlerts.clickOnAlarmBox(isAutocloseable, alertType)
         BootstrapAlerts.closeAlert()
         //then
