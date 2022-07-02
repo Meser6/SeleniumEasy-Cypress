@@ -1,0 +1,139 @@
+{
+    "correctInputs":{
+        "name":{
+            "indexNumber": 0,
+            "input": "name"
+        },
+        "surname":{
+            "indexNumber": 1,
+            "input": "surname"
+        },
+        "email":{
+            "indexNumber": 2,
+            "input": "N@N.pl"
+        },
+        "phoneNumber":{
+            "indexNumber": 3,
+            "input": "1545133523"
+        },
+        "address":{
+            "indexNumber": 4,
+            "input": "NNNNNNNN"
+        },
+        "city":{
+            "indexNumber": 5,
+            "input": "NNNN"
+        },
+        "zipCode":{
+            "indexNumber": 7,
+            "input": "12345"
+        },
+        "website":{
+            "indexNumber": 9,
+            "input": "NNNNNNNNNN"
+        }
+    },
+    "incorrectInputs":{
+        "emptyName":{
+            "indexNumber": 0,
+            "input": "n{backspace}",
+            "errorMessage": "Please supply your first name"
+        },
+        "shortName":{
+            "indexNumber": 0,
+            "input": "N",
+            "errorMessage": "Please enter more than 2 characters"
+         },
+         "emptySurname":{
+            "indexNumber": 1,
+           "input": "n{backspace}",
+            "errorMessage": "Please supply your last name  "
+        },
+        "shortSurame":{
+            "indexNumber": 1,
+            "input": "N",
+            "errorMessage": "Please enter more than 2 characters"
+        },
+        "emptyEmail":{
+            "indexNumber": 2,
+            "input": "n{backspace}",
+             "errorMessage": "Please supply your email address"
+        },
+        "emailWichout@":{
+            "indexNumber": 2,
+            "input": "N",
+            "errorMessage": "Please supply a valid email address"
+        },
+        "emailWithTwo@":{
+            "indexNumber": 2,
+            "input": "N@N@N.pl",
+           "errorMessage": "Please supply a valid email address"
+        },
+        "emptyPhoneNumber":{
+            "indexNumber": 3,
+            "input": "n{backspace}",
+           "errorMessage": "Please supply your phone number"
+        },
+        "charactersInPhoneNumber":{
+            "indexNumber": 3,
+            "input": "15451N3523",
+           "errorMessage": "Please supply a vaild phone number with area code"
+        },
+        "shortPhoneNumber":{
+            "indexNumber": 3,
+            "input": "15451",
+           "errorMessage": "Please supply a vaild phone number with area code"
+        },
+        "emptyAdress":{
+            "indexNumber": 4,
+            "input": "n{backspace}",
+           "errorMessage": "Please supply your street address "
+        },
+        "shortAdress":{
+            "indexNumber": 4,
+            "input": "N",
+           "errorMessage": "Please enter more than 8 characters "
+        },
+        "emptyCity":{
+            "indexNumber": 5,
+            "input": "n{backspace}",
+           "errorMessage": "Please supply your city"
+        },
+        "shortCity":{
+            "indexNumber": 5,
+            "input": "NNN",
+           "errorMessage": "Please enter more than 4 characters"
+        },
+        "shortZipCode":{
+            "indexNumber": 7,
+            "input": "12",
+           "errorMessage": ""
+        },
+        "longZipCode":{
+            "indexNumber": 7,
+            "input": "1234567",
+           "errorMessage": "Please supply a vaild zip code"
+        },
+        "charactersInZipCode":{
+            "indexNumber": 7,
+            "input": "12N45",
+           "errorMessage": "Please supply a vaild zip code"
+        },
+        "emptyZipCode":{
+            "indexNumber": 7,
+            "input": "n{backspace}",
+           "errorMessage": "Please supply your zip code "
+        },
+        "shortMessage":{
+            "indexNumber": 9,
+            "input": "NNNNNNNNN",
+           "errorMessage": "Please enter at least 10 characters and no more than 200"
+        },
+        "longMessage":{
+            "indexNumber": 9,
+            "input": "NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN",
+           "errorMessage": "Please enter at least 10 characters and no more than 200"
+        }
+    }
+}
+
